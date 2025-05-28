@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion Automatisé</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Automatisation Notion</h1>
+        <p>Quelles catégories t'intéressent ?</p>
+        <div class="category active" onclick="selectCategory('physique')">💪 Physique</div>
+        <div class="category disabled">🧠 Mental 🏗️</div>
+        <div class="category disabled">🤝 Social 🏗️</div>
+        <div class="category disabled">💸 Finances 🏗️</div>
+
+        <div id="nextStep" style="display: none;">
+            <p>Sélection enregistrée ! On continue...</p>
+        </div>
+        <button id="continueBtn" style="display: none;" onclick="window.location.href='dossier/physique/force.html'">Continuer →</button>
+    </main>
+
+    <script>
+        const selected = [];
+
+        function selectCategory(cat) {
+            if (!selected.includes(cat)) {
+                selected.push(cat);
+                document.querySelector(`[onclick="selectCategory('${cat}')"]`).classList.add("selected");
+            } else {
+                const index = selected.indexOf(cat);
+                if (index > -1) selected.splice(index, 1);
+                document.querySelector(`[onclick="selectCategory('${cat}')"]`).classList.remove("selected");
+            }
+
+            document.getElementById('nextStep').style.display = selected.includes('physique') ? 'block' : 'none';
+            document.getElementById('continueBtn').style.display = selected.includes('physique') ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
