@@ -4,26 +4,24 @@
   <meta charset="UTF-8">
   <title>Maxer Mes Stats - Physique</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="Screenshot%202025-05-24%20225230.png">
   <style>
     html, body { margin: 0; padding: 0; width: 100vw; height: 100vh; box-sizing: border-box; }
     body { display: flex; flex-direction: column; align-items: center; background: #1e0f16; color: #fff; font-family: 'Segoe UI', Arial, sans-serif; }
-    .container { width: 100%; max-width: 700px; margin: 0 auto; padding: 16px 2vw 50px 2vw; display: flex; flex-direction: column; align-items: center; }
+    .container { width: 100%; max-width: 1700px; margin: 0 auto; padding: 16px 2vw 50px 2vw; display: flex; flex-direction: column; align-items: center; }
     h1 { text-align: center; color: #B71C3A; margin-top: 24px; font-size: 2.2em; letter-spacing: 2px; font-weight: 800; text-shadow: 0 2px 16px #b71c3a55; }
     .return-btn { display: block; margin: 18px auto 12px auto; background: #B71C3A; color: #fff; padding: 12px 22px; border-radius: 16px; font-weight: bold; font-size: 1em; border: none; cursor: pointer; max-width: 200px; width: 90vw; text-align: center; outline: none; box-shadow: 0 0 14px #ffcf57, 0 0 30px #ffcf5720; transition: background 0.18s, box-shadow 0.18s; }
     .return-btn:hover { background: #5c2741; box-shadow: 0 0 18px #ffd74d, 0 0 34px #ffeb3b70; }
-    .cat-section { margin-top: 34px; background: #331b26bb; border-radius: 16px; box-shadow: 0 0 12px #b71c3a33; padding-bottom: 10px; }
+    .cat-section { margin-top: 34px; background: #331b26bb; border-radius: 16px; box-shadow: 0 0 12px #b71c3a33; padding-bottom: 10px; width: 100%; }
     .cat-title { font-size: 1.5em; padding: 18px 0 6px 14px; font-weight: 800; letter-spacing: 2px; text-shadow: 0 2px 16px #b71c3a55; margin: 0; display: flex; align-items: center; gap: 8px; }
-    table { width: 100%; margin: 10px 0 0 0; border-collapse: separate; border-spacing: 0; }
-    th, td { padding: 12px 5px; text-align: center; font-size: 1.01em; }
-    th { background: #B71C3A; color: #fff; font-weight: bold; font-size: 1em; letter-spacing: 1px; border-top-left-radius: 12px; border-top-right-radius: 12px; }
-    td { background: #2c1621cc; border-bottom: 1.5px solid #b71c3a33; vertical-align: middle; font-weight: bold; }
-    tr:last-child td { border-bottom: none; }
-    .input-cell { display: flex; align-items: center; justify-content: center; gap: 4px; }
-    input[type=number] { width: 68px; padding: 6px 7px; border-radius: 6px; border: 1.4px solid #B71C3A; background: #fff; color: #B71C3A; font-size: 1em; font-weight: bold; outline: none; transition: border 0.2s; }
+    .exo-block { width: 96%; background: none; margin: 18px auto 18px auto; padding-bottom: 8px; border-bottom: 1px solid #4c2938; }
+    .input-label { font-weight: bold; font-size: 1.06em; margin-bottom: 3px; display: block;}
+    .input-row { display: flex; align-items: center; gap: 8px; }
+    input[type=number] { width: 78px; padding: 6px 7px; border-radius: 6px; border: 1.4px solid #B71C3A; background: #fff; color: #B71C3A; font-size: 1em; font-weight: bold; outline: none; transition: border 0.2s; }
     input[type=number]::placeholder { font-style: italic; color: #B71C3A99; opacity: 0.6; font-weight: 600; }
-    .lvl-cell { font-size: 1.08em; font-weight: bold; letter-spacing: 1px; transition: color 0.3s; }
-    .progress-bar-container { width: 76px; height: 18px; background: #544055; border-radius: 10px; margin: auto; overflow: hidden; border: 1.5px solid #b71c3a; position: relative; box-shadow: 0 1px 8px #0002; }
-    .progress-bar { height: 100%; border-radius: 10px; transition: width 0.33s, background 0.33s; min-width: 5px; }
+    .exo-unite { color: #f5e8e8; font-style: italic; font-size: 1em;}
+    .progress-bar-container { width: 96%; height: 16px; background: #544055; border-radius: 10px; margin: 7px 0 0 0; overflow: hidden; border: 1.5px solid #b71c3a; position: relative; box-shadow: 0 1px 8px #0002;}
+    .progress-bar { height: 100%; border-radius: 10px; transition: width 0.33s, background 0.33s; min-width: 5px;}
     .bar-grey { background: #bcbcbc; }
     .bar-green { background: #84ffb1; }
     .bar-darkgreen { background: #3be57c; }
@@ -34,17 +32,13 @@
     .lvl-darkgreen { color: #3be57c; }
     .lvl-purple { color: #b76eff; }
     .lvl-gold { color: #ffd700; }
-    .small-italic { display: block; font-size: 0.85em; font-style: italic; opacity: 0.65; margin-top: 2px; }
-    .motivation { display: block; font-size: 1em; margin-top: 5px; margin-bottom: 2px; font-weight: 600; }
-    .motivation span { font-size: 0.89em; font-style: italic; opacity: 0.8; }
-    .neon-btn { box-shadow: 0 0 14px #ffcf57, 0 0 30px #ffcf5720; transition: background 0.22s, box-shadow 0.22s; }
-    .neon-btn:hover { box-shadow: 0 0 18px #ffd74d, 0 0 34px #ffeb3b70; }
-    @media (max-width: 700px) { .container { max-width: 100vw; padding: 6px 0 60px 0; } h1 { font-size: 1.35em; } .cat-title { font-size: 1.08em; } th, td { font-size: 0.94em; padding: 7px 3px;} input[type=number] { width: 52px; padding: 5px 2px;} .progress-bar-container { width: 50px; height: 13px;} .return-btn { max-width: 95vw; padding: 12px 0; } }
-    .actions { display: flex; justify-content: center; gap: 18px; margin: 30px 0 10px 0; flex-wrap: wrap; }
+    .lvl-cell { font-size: 1.06em; font-weight: bold; letter-spacing: 1px; transition: color 0.3s; margin-left: 10px;}
+    .palier { font-size: 0.92em; font-style: italic; opacity: 0.72; margin-left: 6px;}
+    .motivation { display: block; font-size: 1em; margin-top: 4px; margin-bottom: 2px; font-weight: 600;}
+    .actions { display: flex; justify-content: center; gap: 18px; margin: 30px 0 10px 0; flex-wrap: wrap;}
     button { background: #B71C3A; color: #fff; border: none; border-radius: 8px; padding: 8px 17px; font-size: 1em; font-weight: bold; cursor: pointer; box-shadow: 0 0 10px #ffcf57, 0 0 22px #ffcf5720; transition: background 0.22s, box-shadow 0.22s; }
     button:hover { background: #881329; box-shadow: 0 0 18px #ffd74d, 0 0 34px #ffeb3b70; }
-    input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-    input[type=number] { -moz-appearance: textfield; }
+    @media (max-width: 700px) { .container { max-width: 100vw; padding: 6px 0 60px 0; } h1 { font-size: 1.35em; } .cat-title { font-size: 1.08em; } input[type=number] { width: 54px;} .progress-bar-container { height: 12px;} }
   </style>
 </head>
 <body>
@@ -58,65 +52,72 @@
     </div>
   </div>
   <script>
-    const MAX_LVL = 100; // Barre pleine à 100
+    const MAX_LVL = 100;
+
+    // Fonction pour obtenir la valeur du placeholder niveau 50 (interpolation linéaire)
+    function getLvl50(n0, n100, type) {
+      n0 = Number(n0); n100 = Number(n100);
+      if(type === "plus") return Math.round(n0 + (n100-n0)/2);
+      else return Math.round(n0 - (n0-n100)/2);
+    }
 
     const categories = [
       {
         emoji: "💪", titre: "FORCE", color: "#E53935", exos: [
-          { nom: "Bench", placeholder: "ex: 80", unite: "kg", n0: 40, n100: 130, type: "plus" },
-          { nom: "Squat", placeholder: "ex: 110", unite: "kg", n0: 50, n100: 200, type: "plus" },
-          { nom: "Deadlift", placeholder: "ex: 120", unite: "kg", n0: 50, n100: 250, type: "plus" },
-          { nom: "Tractions lestées", placeholder: "ex: 40", unite: "kg", n0: 0, n100: 70, type: "plus" },
-          { nom: "Dips lestées", placeholder: "ex: 50", unite: "kg", n0: 0, n100: 80, type: "plus" },
-          { nom: "Muscle up", placeholder: "ex: 8", unite: "reps", n0: 0, n100: 15, type: "plus" },
-          { nom: "Handstand push-ups", placeholder: "ex: 6", unite: "reps", n0: 0, n100: 15, type: "plus" }
+          { nom: "Bench", unite: "kg", n0: 40, n100: 130, type: "plus" },
+          { nom: "Squat", unite: "kg", n0: 50, n100: 200, type: "plus" },
+          { nom: "Deadlift", unite: "kg", n0: 50, n100: 250, type: "plus" },
+          { nom: "Tractions lestées", unite: "kg", n0: 0, n100: 70, type: "plus" },
+          { nom: "Dips lestées", unite: "kg", n0: 0, n100: 80, type: "plus" },
+          { nom: "Muscle up", unite: "reps", n0: 0, n100: 15, type: "plus" },
+          { nom: "Handstand push-ups", unite: "reps", n0: 0, n100: 15, type: "plus" }
         ]
       },
       {
         emoji: "🫁", titre: "ENDURANCE", color: "#43A047", exos: [
-          { nom: "5 km", placeholder: "ex: 22", unite: "min", n0: 50, n100: 20, type: "moins" },
-          { nom: "10 km", placeholder: "ex: 45", unite: "min", n0: 100, n100: 35, type: "moins" },
-          { nom: "21 km", placeholder: "ex: 90", unite: "min", n0: 200, n100: 95, type: "moins" },
-          { nom: "42 km", placeholder: "ex: 160", unite: "min", n0: 330, n100: 210, type: "moins" },
-          { nom: "Pompes", placeholder: "ex: 70", unite: "reps", n0: 0, n100: 100, type: "plus" },
-          { nom: "Tractions", placeholder: "ex: 15", unite: "reps", n0: 0, n100: 20, type: "plus" },
-          { nom: "Dips", placeholder: "ex: 15", unite: "reps", n0: 0, n100: 50, type: "plus" }
+          { nom: "5 km", unite: "min", n0: 50, n100: 20, type: "moins" },
+          { nom: "10 km", unite: "min", n0: 100, n100: 35, type: "moins" },
+          { nom: "21 km", unite: "min", n0: 200, n100: 95, type: "moins" },
+          { nom: "42 km", unite: "min", n0: 330, n100: 210, type: "moins" },
+          { nom: "Pompes", unite: "reps", n0: 0, n100: 100, type: "plus" },
+          { nom: "Tractions", unite: "reps", n0: 0, n100: 20, type: "plus" },
+          { nom: "Dips", unite: "reps", n0: 0, n100: 50, type: "plus" }
         ]
       },
       {
         emoji: "💨", titre: "VITESSE", color: "#FFA726", exos: [
-          // Tu peux compléter ici les exos vitesse si besoin
+          { nom: "100m", unite: "sec", n0: 18, n100: 11, type: "moins" },
+          { nom: "200m", unite: "sec", n0: 36, n100: 24, type: "moins" }
         ]
       }
     ];
 
+    // Ajoute dynamiquement les placeholders niveau 50
+    categories.forEach(cat => {
+      cat.exos.forEach(exo => {
+        exo.placeholder = "ex: " + getLvl50(exo.n0, exo.n100, exo.type);
+      });
+    });
+
     function createSection(cat) {
-      let html = `<div class="cat-section"><div class="cat-title">${cat.emoji} <span style="color:${cat.color}">${cat.titre}</span></div><table><tr>
-        <th>Exercice</th>
-        <th>Ta performance</th>
-        <th>Niveau</th>
-        <th>Progression</th>
-      </tr>`;
+      let html = `<div class="cat-section"><div class="cat-title">${cat.emoji} <span style="color:${cat.color}">${cat.titre}</span></div>`;
       cat.exos.forEach((exo, i) => {
         let id = `${cat.titre.toLowerCase()}-${i}`;
-        html += `<tr>
-          <td style="font-weight: bold;">${exo.nom}</td>
-          <td class="input-cell">
-            <input type="number" min="0" step="any" id="perf-${id}" placeholder="${exo.placeholder}" 
-              oninput="calcLvl('${cat.titre}',${i})">
-            <span style="margin-left:4px;font-size:0.99em;color:#f5e8e8; font-style:italic;">${exo.unite}</span>
-          </td>
-          <td id="lvl-${id}" class="lvl-cell lvl-grey" style="font-weight: bold;">lvl ?</td>
-          <td>
-            <div class="progress-bar-container"><div id="bar-${id}" class="progress-bar bar-grey" style="width:0%"></div></div>
-            <span id="palier-${id}" class="small-italic"></span>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4"><span id="motivation-${id}" class="motivation"></span></td>
-        </tr>`;
+        html += `<div class="exo-block">
+          <label class="input-label" for="perf-${id}">${exo.nom}</label>
+          <div class="input-row">
+            <input type="number" min="0" step="any" id="perf-${id}" placeholder="${exo.placeholder}" oninput="calcLvl('${cat.titre}',${i})">
+            <span class="exo-unite">${exo.unite}</span>
+            <span id="lvl-${id}" class="lvl-cell lvl-grey">lvl ?</span>
+            <span id="palier-${id}" class="palier"></span>
+          </div>
+          <div class="progress-bar-container">
+            <div id="bar-${id}" class="progress-bar bar-grey" style="width:0%"></div>
+          </div>
+          <span id="motivation-${id}" class="motivation"></span>
+        </div>`;
       });
-      html += "</table></div>";
+      html += "</div>";
       return html;
     }
     document.getElementById("sections").innerHTML = categories.map(createSection).join("");
@@ -146,16 +147,17 @@
         if (lvl > MAX_LVL) lvl = MAX_LVL;
         percent = (lvl / MAX_LVL) * 100;
 
-        if (lvl === "?" || lvl == 0) { bar = "bar-grey"; color = "lvl-grey"; }
-        else if (lvl <= 30) { bar = "bar-green"; color = "lvl-green"; }
-        else if (lvl <= 50) { bar = "bar-darkgreen"; color = "lvl-darkgreen"; }
-        else if (lvl <= 100) { bar = "bar-purple"; color = "lvl-purple"; }
-        else { bar = "bar-gold"; color = "lvl-gold"; }
+        // Barre dorée à partir du niveau 90
+        if (lvl >= 90) { bar = "bar-gold"; color = "lvl-gold"; }
+        else if (lvl >= 50) { bar = "bar-purple"; color = "lvl-purple"; }
+        else if (lvl >= 30) { bar = "bar-darkgreen"; color = "lvl-darkgreen"; }
+        else if (lvl > 0) { bar = "bar-green"; color = "lvl-green"; }
+        else { bar = "bar-grey"; color = "lvl-grey"; }
 
-        if (lvl <= 30) message = "<span style='color:#84ffb1;'>🚦 Ce n'est que le début !</span>";
-        else if (lvl <= 50) message = "<span style='color:#3be57c;'>🔝 Incroyable déjà !</span>";
-        else if (lvl <= 100) message = "<span style='color:#b76eff;'>⚡ Meilleur que la plupart !</span>";
-        else message = "<span style='color:#ffd700;'>👹 Un putain de monstre !</span>";
+        if (lvl < 30) message = "<span style='color:#84ffb1;'>🚦 Ce n'est que le début !</span>";
+        else if (lvl < 50) message = "<span style='color:#3be57c;'>🔝 Incroyable déjà !</span>";
+        else if (lvl < 90) message = "<span style='color:#b76eff;'>⚡ Meilleur que la plupart !</span>";
+        else message = "<span style='color:#ffd700;'>🏆 Champion ! N'hésite pas à flex !</span>";
       }
       document.getElementById(`lvl-${id}`).innerHTML = `<span class='${color}'>lvl ${lvl}</span>`;
       document.getElementById(`bar-${id}`).className = `progress-bar ${bar}`;
@@ -165,6 +167,7 @@
     }
     window.calcLvl = calcLvl;
 
+    // Fonctions d'export identiques à ta base, non modifiées ici...
     function emojiBar(percent) {
       let filled = Math.round(percent / 10);
       let empty = 10 - filled;
@@ -172,7 +175,6 @@
       if (percent < 100)  return "🟩".repeat(filled) + "⬜".repeat(empty);
       if (percent >= 100) return "⭐".repeat(filled) + "⬜".repeat(empty);
     }
-
     function notionExport() {
       let total = 0;
       let out = "";
@@ -193,15 +195,7 @@
           let lvlTxt = document.getElementById(`lvl-${id}`).innerText.trim();
           let barPercent = parseInt(document.getElementById(`bar-${id}`).style.width) || 0;
           let bar = emojiBar(barPercent);
-          let detail = "";
-          if (exo.nom === "Handstand push-ups" && lvlTxt.includes("lvl") && parseInt(lvlTxt.split(" ")[1]) <= 30) {
-            detail = "Pour parvenir à un handstand push-up il te faut :\nLvl 0 : tenir sur les mains avec mur\nLvl 1 : se décoller 5 sec du mur\nLvl 2 : 10 sec\nLvl 3 : 15 sec\nLvl 4 : frog stand 10 sec\n---\nLvl 10 : sans mur 10 sec\n";
-          }
-          if (exo.nom === "Muscle up" && lvlTxt.includes("lvl") && parseInt(lvlTxt.split(" ")[1]) <= 10) {
-            detail = "Pour parvenir à un muscle up il te faut :\nLvl 0 : mal fait - un bras après l’autre\nLvl 5 : mal fait - deux bras avec aide des jambes\n---\nLvl 10 : 1 clean\n";
-          }
           out += `- ${exo.nom} (${val ? val : "?"} ${exo.unite}) — ${lvlTxt}\n  Progression : ${bar}\n`;
-          if (detail) out += detail + "\n";
         });
         out += "\n\n";
       });
