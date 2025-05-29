@@ -3,19 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Maxer Mes Stats - Physique</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
   <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #1e0f16;
-      color: #fff;
+    html, body {
       margin: 0;
       padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow-x: hidden;
+      overscroll-behavior-x: none;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      max-width: 100vw;
+      background: #1e0f16;
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
     .container {
+      width: 100%;
       max-width: 700px;
       margin: 0 auto;
       padding: 16px 2vw 50px 2vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     h1 {
       text-align: center;
@@ -24,6 +41,7 @@
       font-size: 2.2em;
       letter-spacing: 2px;
       font-weight: 800;
+      text-shadow: 0 2px 16px #b71c3a55;
     }
     .return-btn {
       display: block;
@@ -207,6 +225,15 @@
       background: #881329;
       box-shadow: 0 0 18px #ffd74d, 0 0 34px #ffeb3b70;
     }
+    /* Empêche les flèches des inputs number */
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
   </style>
 </head>
 <body>
@@ -221,33 +248,35 @@
   </div>
   <script>
     const MAX_LVL = 150; // Barre pleine à 150
+
+    // Tableau à jour selon TA demande (niveau 0/niveau 150)
     const categories = [
       {
         emoji: "💪", titre: "FORCE", color: "#E53935", exos: [
-          { nom: "Bench", placeholder: "ex: 80", unite: "kg", n0: 50, n150: 120, type: "plus" },
-          { nom: "Squat", placeholder: "ex: 110", unite: "kg", n0: 50, n150: 160, type: "plus" },
-          { nom: "Deadlift", placeholder: "ex: 120", unite: "kg", n0: 50, n150: 180, type: "plus" },
-          { nom: "Tractions lestées", placeholder: "ex: 40", unite: "kg", n0: 0, n150: 55, type: "plus" },
-          { nom: "Dips lestées", placeholder: "ex: 50", unite: "kg", n0: 0, n150: 65, type: "plus" },
-          { nom: "Muscle up", placeholder: "ex: 10", unite: "reps", n0: 1, n150: 15, type: "plus", start: 10 },
+          { nom: "Bench", placeholder: "ex: 80", unite: "kg", n0: 50, n150: 130, type: "plus" },
+          { nom: "Squat", placeholder: "ex: 110", unite: "kg", n0: 50, n150: 200, type: "plus" },
+          { nom: "Deadlift", placeholder: "ex: 120", unite: "kg", n0: 50, n150: 250, type: "plus" },
+          { nom: "Tractions lestées", placeholder: "ex: 40", unite: "kg", n0: 0, n150: 70, type: "plus" },
+          { nom: "Dips lestées", placeholder: "ex: 50", unite: "kg", n0: 0, n150: 80, type: "plus" },
+          { nom: "Muscle up", placeholder: "ex: 8", unite: "reps", n0: 0, n150: 15, type: "plus" },
           { nom: "Handstand push-ups", placeholder: "ex: 6", unite: "reps", n0: 0, n150: 15, type: "plus" }
         ]
       },
       {
         emoji: "🫁", titre: "ENDURANCE", color: "#43A047", exos: [
-          { nom: "5 km", placeholder: "ex: 22", unite: "min", n0: 30, n150: 22, type: "moins" },
-          { nom: "10 km", placeholder: "ex: 45", unite: "min", n0: 60, n150: 45, type: "moins" },
-          { nom: "21 km", placeholder: "ex: 90", unite: "min", n0: 120, n150: 90, type: "moins" },
-          { nom: "42 km", placeholder: "ex: 160", unite: "min", n0: 180, n150: 140, type: "moins" },
-          { nom: "Pompes", placeholder: "ex: 70", unite: "reps", n0: 0, n150: 90, type: "plus" },
-          { nom: "Tractions", placeholder: "ex: 15", unite: "reps", n0: 0, n150: 20, type: "plus" },
-          { nom: "Dips", placeholder: "ex: 15", unite: "reps", n0: 10, n150: 30, type: "plus" }
+          { nom: "5 km", placeholder: "ex: 22", unite: "min", n0: 50, n150: 18, type: "moins" },
+          { nom: "10 km", placeholder: "ex: 45", unite: "min", n0: 100, n150: 35, type: "moins" },
+          { nom: "21 km", placeholder: "ex: 90", unite: "min", n0: 180, n150: 80, type: "moins" },
+          { nom: "42 km", placeholder: "ex: 160", unite: "min", n0: 360, n150: 150, type: "moins" },
+          { nom: "Pompes", placeholder: "ex: 70", unite: "reps", n0: 0, n150: 150, type: "plus" },
+          { nom: "Tractions", placeholder: "ex: 15", unite: "reps", n0: 0, n150: 30, type: "plus" },
+          { nom: "Dips", placeholder: "ex: 15", unite: "reps", n0: 10, n150: 40, type: "plus" }
         ]
       },
       {
         emoji: "💨", titre: "VITESSE", color: "#FFA726", exos: [
-          { nom: "100 m", placeholder: "ex: 15", unite: "sec", n0: 18, n150: 14, type: "moins" },
-          { nom: "200 m", placeholder: "ex: 29", unite: "sec", n0: 36, n150: 28, type: "moins" }
+          { nom: "100 m", placeholder: "ex: 15", unite: "sec", n0: 18, n150: 13, type: "moins" },
+          { nom: "200 m", placeholder: "ex: 29", unite: "sec", n0: 36, n150: 26, type: "moins" }
         ]
       }
     ];
@@ -290,9 +319,8 @@
       const input = document.getElementById(`perf-${id}`);
       let perf = parseFloat(input.value.replace(',', '.'));
       let lvl = "?", percent = 0, bar = "bar-grey", color = "lvl-grey";
-      let message = "", small = "";
-      let palierText = "";
-      palierText = `lvl 150 = ${exo.n150} ${exo.unite}`;
+      let message = "";
+      let palierText = `lvl 150 = ${exo.n150} ${exo.unite}`;
       if (isNaN(perf) || perf === 0) {
         lvl = "?";
         percent = 0;
@@ -338,18 +366,18 @@
     }
     window.calcLvl = calcLvl;
 
-    // Barre emoji Notion
     function emojiBar(percent) {
-      let filled = Math.round(percent / 10);
-      let empty = 10 - filled;
-      if (percent === 0) return "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜";
-      if (percent <= 33) return "🟩".repeat(filled) + "⬜".repeat(empty);
-      if (percent <= 66) return "🟩".repeat(filled) + "⬜".repeat(empty);
-      if (percent <= 90) return "🟪".repeat(filled) + "⬜".repeat(empty);
-      return "🟨".repeat(filled) + "⬜".repeat(empty);
-    }
+  let filled = Math.round(percent / 10);
+  let empty = 10 - filled;
+  if (percent === 0) return "⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜";
+  if (percent < 100)  return "🟩".repeat(filled) + "⬜".repeat(empty);
+  // pile barre pleine ou plus = étoiles dorées !
+  if (percent >= 100) return "⭐".repeat(filled) + "⬜".repeat(empty);
+}
 
-    // Copier Notion avec total
+
+
+    // Copier Notion avec total, lignes aérées
     function notionExport() {
       let total = 0;
       let out = "";
@@ -377,9 +405,10 @@
           if (exo.nom === "Muscle up" && lvlTxt.includes("lvl") && parseInt(lvlTxt.split(" ")[1]) <= 10) {
             detail = "Pour parvenir à un muscle up il te faut :\nLvl 0 : mal fait - un bras après l’autre\nLvl 5 : mal fait - deux bras avec aide des jambes\n---\nLvl 10 : 1 clean\n";
           }
-          out += `- ${exo.nom} (${val ? val : "?"} ${exo.unite}) — ${lvlTxt}\n  Progression : ${bar}\n${detail ? detail : ""}`;
+          out += `- ${exo.nom} (${val ? val : "?"} ${exo.unite}) — ${lvlTxt}\n  Progression : ${bar}\n`;
+          if (detail) out += detail + "\n";
         });
-        out += "\n";
+        out += "\n\n";
       });
       return out;
     }
